@@ -1,67 +1,80 @@
-import React, { useState } from 'react'
-import { useLocation, useParams } from 'react-router-dom'
-import { useData } from '../Context/AppContext';
+import React, { useState } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
+import { AiOutlineUser, AiOutlineMail, AiFillCamera } from "react-icons/ai";
+import { MdSave } from "react-icons/md";
+import { RxCross2 } from "react-icons/rx";
 
 function EditUser() {
-  
-  const {id} = useParams();
+  const navigate = useNavigate();
   const location = useLocation();
-  const user = location.state;
-  if(!user) {
-    return <div className='absolute text-2xl font-semibold left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2'>No user found</div>;
-  }
-
-  const [firstname, setfirstname] = useState(user.first_name)
-  const [lastname, setlastname] = useState(user.last_name)
-  const [email, setemail] = useState(user.email)
-  const [avatar, setavatar] = useState(user.avatar)
-
-  const {updateUser, navigate} = useData()
-
-  const data = {
-    id: id,
-    first_name: firstname,
-    last_name: lastname,
-    email: email,
-    avatar: avatar
-  }
-
+  const user = location.state || {};
+  
+  const [formData, setFormData] = useState({
+    firstName: user.first_name || '',
+    lastName: user.last_name || '',
+    email: user.email || '',
+    avatar: user.avatar || ''
+  });
+  
+  const handleImageUpload = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setFormData({ ...formData, avatar: reader.result });
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+  
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    updateUser(id, data)
-    navigate(`/user-list/page/1`);
-    setfirstname(user.first_name)
-    setlastname(user.last_name)
-    setemail(user.email)
-    setavatar(user.avatar)
-  }
+    console.log("Updated User Data:", formData);
+    navigate(-1, { state: formData });
+  };
   
   return (
-    <form onSubmit={(e)=>{
-      handleSubmit(e);
-    }}>
-      <div className='w-full min-h-screen px-10 pt-8  bg-gradient-to-b from-cyan-200 to-white flex flex-col justify-center items-center gap-4'>
-        <div className='flex flex-col gap-4'>
-          <h1 className='px-4 font-semibold text-xl'>First Name</h1>
-          <input className='text-black text-xl placeholder:text-gray-600 font-semibold outline-none rounded-2xl px-4 py-2 ' type="text"  placeholder='Enter first name' value={firstname} onChange={(e)=>setfirstname(e.target.value)}/>
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-cyan-200 to-white p-6">
+      <div className="bg-white p-6 rounded-2xl shadow-lg w-full max-w-md">
+        <div className="flex justify-between items-center mb-4">
+          <h2 className="text-2xl font-bold">Edit User</h2>
+          <button onClick={() => navigate(-1)} className="text-gray-500 hover:text-red-500"><RxCross2 size={24} /></button>
         </div>
-        <div className='flex flex-col gap-4'>
-          <h1 className='px-4 font-semibold text-xl'>Last Name</h1>
-          <input className='text-black text-xl placeholder:text-gray-600 font-semibold outline-none rounded-2xl px-4 py-2 ' type="text"  placeholder='Enter last name' value={lastname} onChange={(e)=> setlastname(e.target.value) }/>
+
+        <div className="flex flex-col items-center mb-4">
+          <label className="relative cursor-pointer">
+            <img src={formData.avatar || "https://via.placeholder.com/150"} alt="Avatar" className="w-24 h-24 rounded-full border-2 border-gray-300 object-cover" />
+            <input type="file" accept="image/*" className="hidden" onChange={handleImageUpload} />
+            <AiFillCamera className="absolute bottom-0 right-0 bg-white p-1 rounded-full text-gray-700 w-6 h-6 border border-gray-300" />
+          </label>
         </div>
-        <div className='flex flex-col gap-4'>
-          <h1 className='px-4 font-semibold text-xl'>Email</h1>
-          <input className='text-black text-xl placeholder:text-gray-600 font-semibold outline-none rounded-2xl px-4 py-2 ' type="text" placeholder='Enter email' value={email} onChange={(e)=> setemail(e.target.value)}/>
-        </div>
-        <div className='flex flex-col gap-4'>
-          <h1 className='px-4 font-semibold text-xl'>Avatar</h1>
-          <input className='text-black text-xl placeholder:text-gray-600 font-semibold outline-none rounded-2xl px-4 py-2 ' type="text" placeholder='Enter avatar' value={avatar} onChange={(e)=> setavatar(e.target.value)}/>
-        </div>
-        <button type="submit" className='text-white bg-emerald-600 font-semibold text-xl px-3 py-2 rounded-xl'> Update </button>
+
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <div>
+            <label className="flex items-center text-gray-600 mb-1"><AiOutlineUser className="mr-2" /> First Name</label>
+            <input type="text" name="firstName" value={formData.firstName} onChange={(e) => setFormData({ ...formData, firstName: e.target.value })} required 
+              className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-400 focus:outline-none" />
+          </div>
+
+          <div>
+            <label className="flex items-center text-gray-600 mb-1"><AiOutlineUser className="mr-2" /> Last Name</label>
+            <input type="text" name="lastName" value={formData.lastName} onChange={(e)=>{setFormData({ ...formData, lastName: e.target.value})}} required 
+              className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-400 focus:outline-none" />
+          </div>
+
+          <div>
+            <label className="flex items-center text-gray-600 mb-1"><AiOutlineMail className="mr-2" /> Email</label>
+            <input type="email" name="email" value={formData.email} onChange={(e)=>{setFormData({ ...formData, email : e.target.value})}} required 
+              className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-400 focus:outline-none" />
+          </div>
+
+          <button type="submit" className="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 flex items-center justify-center gap-2">
+            <MdSave /> Save Changes
+          </button>
+        </form>
       </div>
-    </form>
-  )
+    </div>
+  );
 }
 
-export default EditUser
+export default EditUser;

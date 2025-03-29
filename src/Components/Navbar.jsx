@@ -1,11 +1,17 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { PiSignOutBold } from "react-icons/pi";
 
 function Navbar() {
     
-    if(window.location.pathname === '/authentication') {
-        return null
-    }
+    // useEffect(() => {
+        
+    //     return () => {
+    //       if(window.location.pathname === '/authentication') {
+    //           return null
+    //       }
+    //   }
+    // }, [window.location.pathname])
+    
 
     const logout = () => {
         localStorage.removeItem('token')
