@@ -1,9 +1,4 @@
-Here's a comprehensive `README.md` file for your User Management System project:
-
-```markdown
 # User Management System
-
-![Project Preview](https://user-images.githubusercontent.com/.../preview.png) *[Add your own preview image]*
 
 A modern, responsive user management application with authentication, CRUD operations, and pagination. Built with React.js and Tailwind CSS.
 
@@ -28,7 +23,7 @@ A modern, responsive user management application with authentication, CRUD opera
 
 ## Live Demo
 
-Experience the app live: [User Management System Demo](https://user-management-system-46ft.vercel.app/authentication)
+Experience the app live: [User Management System Demo](https://user-management-system-46ft.vercel.app)
 
 ## Screenshots
 
@@ -45,18 +40,12 @@ Experience the app live: [User Management System Demo](https://user-management-s
 - 🔄 Axios for API calls
 - ✨ React Icons
 
-**Backend Integration**
-- 🔐 JWT Authentication
-- 📡 RESTful API endpoints
-- 📦 Context API for state management
-
 ## Installation
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-username/user-management-system.git
+   git clone https://github.com/Lakshya-jangid-08/User-Management-System.git
    cd user-management-system
-   ```
 
 2. Install dependencies:
    ```bash
@@ -73,22 +62,6 @@ Experience the app live: [User Management System Demo](https://user-management-s
    ```bash
    npm run dev
    ```
-
-## Project Structure
-
-```
-src/
-├── Components/
-│   ├── Authentication.jsx       # Login page
-│   ├── EditUser.jsx             # User editing form
-│   ├── Footer.jsx               # Application footer
-│   ├── Navbar.jsx               # Navigation bar
-│   ├── Pagenavigation.jsx       # Pagination controls
-│   ├── Protector.jsx            # Route protection
-│   └── UserList.jsx             # User listing page
-├── Context/
-│   └── AppContext.jsx           # Global state management
-```
 
 ## Available Scripts
 
@@ -133,9 +106,9 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 ## Contact
 
-Your Name - [@yourtwitter](https://twitter.com/yourtwitter) - your.email@example.com
+Name - Lakshya jangid || thelakshya31@gmail.com
 
-Project Link: [https://github.com/your-username/user-management-system](https://github.com/your-username/user-management-system)
+Project Link: https://github.com/Lakshya-jangid-08/User-Management-System
 ```
 
 **Notes for customization:**
