@@ -4,12 +4,15 @@ import './index.css'
 import App from './App.jsx'
 import { BrowserRouter } from 'react-router-dom'
 import AppContext from './Context/AppContext.jsx'
+import Protector from './Components/Protector.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <BrowserRouter>
       <AppContext>
-        <App />
+        <Protector>
+          <App />
+        </Protector>
       </AppContext>
     </BrowserRouter>
   </StrictMode>,

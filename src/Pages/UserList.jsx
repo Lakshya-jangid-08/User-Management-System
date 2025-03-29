@@ -5,7 +5,6 @@ import { useParams } from 'react-router-dom'
 import { useData } from '../Context/AppContext';
 import Pagenavigation from '../Components/Pagenavigation';
 import Footer from '../Components/Footer';
-import EditUser from './EditUser';
 
 function UserList() {
   

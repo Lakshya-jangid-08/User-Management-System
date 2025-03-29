@@ -25,7 +25,7 @@ function AppContext({ children }) {
         try {
             await axios.delete(`${import.meta.env.VITE_BASE_URL}/api/users/${id}`)
             setuser(prevUsers => prevUsers.filter(user => user.id !== id));
-            console.log("User deleted successfully",id);
+            console.log("User deleted successfully");
         } catch (error) {
             console.log('error');
 
@@ -45,14 +45,14 @@ function AppContext({ children }) {
     const updateUser = async(id, data) => {
         try {
             const response = await axios.put(`${import.meta.env.VITE_BASE_URL}/api/users/${id}`, data)
-            setuser(prevUsers => prevUsers.map(user => user.id === id ? response.data : user));
-            console.log("User updated successfully");
+            console.log("Updated User Response:", response.data);
         } catch (error) {
             console.log(error)
         }
     }
+
     const value = {
-        navigate, getUsers, removeUser, editUser, Data, user
+        navigate, getUsers, removeUser,updateUser, editUser, Data, user
     }
 
     return (

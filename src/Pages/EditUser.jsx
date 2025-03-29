@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { useLocation, useParams } from 'react-router-dom'
+import { useData } from '../Context/AppContext';
 
 function EditUser() {
   
@@ -15,6 +16,8 @@ function EditUser() {
   const [email, setemail] = useState(user.email)
   const [avatar, setavatar] = useState(user.avatar)
 
+  const {updateUser, navigate} = useData()
+
   const data = {
     id: id,
     first_name: firstname,
@@ -26,8 +29,8 @@ function EditUser() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    
-
+    updateUser(id, data)
+    navigate(`/user-list/page/1`);
     setfirstname(user.first_name)
     setlastname(user.last_name)
     setemail(user.email)
