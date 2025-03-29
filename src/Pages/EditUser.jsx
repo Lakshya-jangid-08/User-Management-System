@@ -3,12 +3,14 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { AiOutlineUser, AiOutlineMail, AiFillCamera } from "react-icons/ai";
 import { MdSave } from "react-icons/md";
 import { RxCross2 } from "react-icons/rx";
+import { useData } from '../Context/AppContext';
 
 function EditUser() {
   const navigate = useNavigate();
   const location = useLocation();
   const user = location.state || {};
-  
+  const {updateUser} = useData();
+
   const [formData, setFormData] = useState({
     firstName: user.first_name || '',
     lastName: user.last_name || '',
@@ -27,11 +29,16 @@ function EditUser() {
     }
   };
   
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Updated User Data:", formData);
-    navigate(-1, { state: formData });
-  };
+    try {
+        await updateUser(user.id, formData);
+        navigate(-1);
+    } catch (error) {
+        alert('Failed to update user');
+    }
+};
+
   
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-cyan-200 to-white p-6">

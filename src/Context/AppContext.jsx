@@ -11,9 +11,9 @@ function AppContext({ children }) {
     const [user, setuser] = useState([]);
 
 
-    const getUsers = async (id) => {
+    const getUsers = async (pageid) => {
         try {
-            const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/api/users?page=${id}`)
+            const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/api/users?page=${pageid}`)
             setData(response.data)
             setuser(response.data.data);
         } catch (error) {
@@ -21,38 +21,51 @@ function AppContext({ children }) {
         }
     }
 
-    const removeUser = async (id) => {
+    const removeUser = async (userid,pageid) => {
         try {
-            await axios.delete(`${import.meta.env.VITE_BASE_URL}/api/users/${id}`)
-            setuser(prevUsers => prevUsers.filter(user => user.id !== id));
-            console.log("User deleted successfully");
+            const response = await axios.delete(`${import.meta.env.VITE_BASE_URL}/api/users/${userid}`)
+            console.log(response.status)
+            if (response.status === 200 || response.status === 204) {
+                setuser(prevUsers => prevUsers.filter(user => user.id !== userid));
+                await getUsers(pageid);
+            }
+            alert('User deleted successfully');
         } catch (error) {
-            console.log('error');
-
+            console.log('error' , error);
         }
     }
 
-    const editUser = async (id) => {
+    const updateUser = async (id, data) => {
         try {
-            const response = await axios.put(`${import.meta.env.VITE_BASE_URL}/api/users/${id}`)
-            setuser(prevUsers => prevUsers.map(user => user.id === id ? response.data : user));
-            console.log("User updated successfully");
+            const userData = {
+                first_name: data.firstName,
+                last_name: data.lastName,
+                email: data.email,
+                avatar: data.avatar
+            };
+            
+            const response = await axios.put(`${import.meta.env.VITE_BASE_URL}/api/users/${id}`, userData);
+            console.log(response.status)
+            setuser(prevUsers => 
+                prevUsers.map(user => 
+                    user.id === id ? { 
+                        ...user, 
+                        first_name: data.firstName,
+                        last_name: data.lastName,
+                        email: data.email,
+                        avatar: data.avatar || user.avatar
+                    } : user
+                )
+            );
+            return response.data;
         } catch (error) {
-            console.log(error)
-        }
-    }
-
-    const updateUser = async(id, data) => {
-        try {
-            const response = await axios.put(`${import.meta.env.VITE_BASE_URL}/api/users/${id}`, data)
-            console.log("Updated User Response:", response.data);
-        } catch (error) {
-            console.log(error)
+            console.error("Update error:", error);
+            throw error;
         }
     }
 
     const value = {
-        navigate, getUsers, removeUser,updateUser, editUser, Data, user
+        navigate, getUsers, removeUser, updateUser, Data, user
     }
 
     return (

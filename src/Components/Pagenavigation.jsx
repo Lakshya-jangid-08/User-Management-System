@@ -7,7 +7,7 @@ function Pagenavigation() {
     return (
         <div className="overflow-x-scroll overflow-y-hidden w-[100%] h-16 flex justify-center items-center bg-white shadow-md rounded-lg mt-4 mb-4 px-10 py-3 ">
           <div className="flex space-x-2 whitespace-nowrap gap-3">
-            {Array.from({ length: 5 }).map((_, index) => (
+            {Array.from({ length: Data.total_pages }).map((_, index) => (
               <div
                 onClick={() => navigate(`/user-list/page/${index + 1}`)}
                 key={index}

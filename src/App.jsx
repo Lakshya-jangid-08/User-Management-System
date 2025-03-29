@@ -4,6 +4,7 @@ import Authentication from './Pages/Authentication'
 import UserList from './Pages/UserList'
 import Navbar from './Components/Navbar'
 import EditUser from './Pages/EditUser'
+import HomePage from './Pages/Home'
 
 function App() {
   const location = useLocation()
@@ -12,7 +13,8 @@ function App() {
     {location.pathname !== '/authentication' && <Navbar />}
     <Routes>
         <Route path='/authentication' element={< Authentication />} />
-        <Route path='/user-list/page/:id' element={< UserList />} />
+        <Route path='/user-list/page/:pageId' element={< UserList />} />
+        <Route path='/' element={< HomePage />} />
         <Route path='/edit-user/:id' element={< EditUser />} />
     </Routes>
     </>
