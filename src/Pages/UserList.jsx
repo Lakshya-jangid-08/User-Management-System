@@ -21,7 +21,7 @@ function UserList() {
     <>
       <div className='w-full min-h-screen px-10 pt-8  bg-gradient-to-b from-cyan-200 to-white'>
         <div className=''>
-          <h1 className='text-2xl font-bold mb-3'>User List - Page{id}</h1>
+          <h1 className='text-lg sm:text-xl md:text-2xl  font-bold mb-3'>User List - Page{id}</h1>
           {user.length === 0 ?
             <div className='absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2'>
               <h1 className='text-2xl font-bold'>No users found. Please check another page or reload.</h1>
@@ -36,7 +36,7 @@ function UserList() {
                           setShowAction(item.id)
                         }
                       } className='w-full h-full cursor-pointer flex items-center gap-4'>
-                        <img className='rounded-full w-20 h-20' src={item.avatar} alt="avtar" />
+                        <img className='rounded-full w-10 h-10 sm:w-14 sm:h-14 md:w-20 md:h-20' src={item.avatar} alt="avtar" />
                         <div className="">
                           <h2 className='text-lg font-semibold'>{item.first_name} {item.last_name}</h2>
                           <p>{item.email}</p>

@@ -9,9 +9,7 @@ function App() {
   const location = useLocation()
   return (
     <>
-    {/* <Navbar/> */}
-    
-      {location.pathname !== '/authentication' && <Navbar />}
+    {location.pathname !== '/authentication' && <Navbar />}
     <Routes>
         <Route path='/authentication' element={< Authentication />} />
         <Route path='/user-list/page/:id' element={< UserList />} />
