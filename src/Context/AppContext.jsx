@@ -27,7 +27,7 @@ function AppContext({ children }) {
             console.log(response.status)
             if (response.status === 200 || response.status === 204) {
                 setuser(prevUsers => prevUsers.filter(user => user.id !== userid));
-                await getUsers(pageid);
+                // await getUsers(pageid);
             }
             alert('User deleted successfully');
         } catch (error) {

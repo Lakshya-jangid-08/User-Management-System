@@ -24,7 +24,7 @@ function Authentication() {
       if (response.status === 200) {
         const token = response.data.token
         localStorage.setItem('token', token)
-        navigate('/user-list/page/1');
+        navigate('/');
       }
       console.log('Login successful:', response.data)
     } catch (error) {
