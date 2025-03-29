@@ -19,14 +19,14 @@ function UserList() {
 
   return (
     <>
-      <div className='w-full min-h-screen px-10 pt-8  bg-gradient-to-b from-cyan-200 to-white'>
+      <div className='w-full min-h-screen px-3 sm:px-5 md:px-8 pt-3 sm:pt-5 md:pt-8  bg-gradient-to-b from-cyan-200 to-white'>
         <div className=''>
           <h1 className='text-lg sm:text-xl md:text-2xl  font-bold mb-3'>User List - Page{id}</h1>
           {user.length === 0 ?
             <div className='absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2'>
               <h1 className='text-2xl font-bold'>No users found. Please check another page or reload.</h1>
             </div> :
-            <div className='grid sm:grid-cols-1 md:grid-cols-2  lg:grid-cols-3 gap-4 '>
+            <div className='grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-0.5 md:gap-2 lg:gap-4'>
               {user.map((item) => (
                 <div key={item.id} className='relative bg-white gap-4 flex items-center p-4 m-2 rounded-lg shadow-md min-w-fit'>
                   {showAction !== item.id ?
