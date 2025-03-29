@@ -25,12 +25,6 @@ A modern, responsive user management application with authentication, CRUD opera
 
 Experience the app live: [User Management System Demo](https://user-management-system-46ft.vercel.app)
 
-## Screenshots
-
-| Login Screen | User List | Edit Profile |
-|--------------|-----------|--------------|
-| ![Login](screenshots/login.png) | ![User List](screenshots/user-list.png) | ![Edit](screenshots/edit.png) |
-
 ## Tech Stack
 
 **Frontend**
